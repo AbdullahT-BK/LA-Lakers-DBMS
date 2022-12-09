@@ -12,11 +12,6 @@ CONSTRAINT pk_arena PRIMARY KEY (team_arena)
  
 
 
-
-
-
-
-
 b) GAME TABLE
 CREATE TABLE game (
 game_num NUMBER NOT NULL,
