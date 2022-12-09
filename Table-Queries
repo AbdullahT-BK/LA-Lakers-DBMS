@@ -1,0 +1,388 @@
+a) ARENA TABLE
+CREATE TABLE arena (
+team_arena VARCHAR(50) NOT NULL,
+name VARCHAR(50) NOT NULL,
+capacity NUMBER NOT NULL,
+address VARCHAR(50) NOT NULL,
+city VARCHAR(50) NOT NULL,
+state VARCHAR(35) NOT NULL,
+zip VARCHAR(20) NOT NULL,
+CONSTRAINT pk_arena PRIMARY KEY (team_arena)
+);
+ 
+
+
+
+
+
+
+
+b) GAME TABLE
+CREATE TABLE game (
+game_num NUMBER NOT NULL,
+team_arena VARCHAR(50) NOT NULL,
+teams VARCHAR(50) NOT NULL,
+game_date DATE,
+game_time VARCHAR(10) NOT NULL,
+CONSTRAINT pk_game PRIMARY KEY (game_num),
+CONSTRAINT fk_game FOREIGN KEY (team_arena)
+  	REFERENCES arena (team_arena)
+);
+ 
+c) TEAM TABLE 
+CREATE TABLE team (
+team_id NUMBER NOT NULL,
+team_name VARCHAR(50) NOT NULL,
+CONSTRAINT pk_team PRIMARY KEY (team_id)
+);
+ 
+d) PLAYERS TABLE
+CREATE TABLE players (
+player_num NUMBER NOT NULL,
+team_id NUMBER NOT NULL,
+name VARCHAR(50) NOT NULL,
+position VARCHAR(15) NOT NULL,
+date_of_birth DATE,
+salary DOUBLE,
+nationality VARCHAR(50) NOT NULL,
+CONSTRAINT pk_players PRIMARY KEY (player_num),
+CONSTRAINT fk_players FOREIGN KEY (team_id)
+  	REFERENCES team (team_id)
+);
+ 
+e) STATISTICS TABLE
+CREATE TABLE statistics (
+stats_id NUMBER NOT NULL,
+game_num NUMBER NOT NULL,
+player_num NUMBER NOT NULL,
+points NUMBER NOT NULL,
+assists NUMBER NOT NULL,
+rebounds NUMBER NOT NULL,
+blocks NUMBER NOT NULL,
+steals NUMBER NOT NULL,
+turnovers NUMBER NOT NULL,
+CONSTRAINT pk_statistics PRIMARY KEY (stats_id),
+CONSTRAINT fk1_statistics FOREIGN KEY (game_num)
+  	REFERENCES game (game_num),
+CONSTRAINT fk2_statistics FOREIGN KEY (player_num)
+  	REFERENCES players (player_num)
+);
+ 
+f) COACHING STAFF TABLE
+CREATE TABLE coaching_staff (
+coach_id NUMBER NOT NULL,
+team_id NUMBER NOT NULL,
+coach_type VARCHAR(50) NOT NULL,
+name VARCHAR(50) NOT NULL,
+date_of_birth DATE,
+salary DOUBLE,
+CONSTRAINT pk_coaching_staff PRIMARY KEY (coach_id),
+CONSTRAINT fk_coaching_staff FOREIGN KEY (team_id)
+  	REFERENCES team (team_id)
+);
+
+a) ARENA TABLE
+
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Amalie Arena’, ‘Toronto Raptors’, 20500, ‘401 Channelside Dr’, ‘Tampa’, ‘FL’, ‘33602’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘American Airlines Arena’, ‘Miami Heat’, 19600, ‘601 Biscayne Blvd’, ‘Miami’, ‘FL’, ‘33132’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘American Airlines Center’, ‘Dallas Mavericks’, 19200, ‘2500 Victory Avenue’, ‘Dallas’, ‘TX’, ‘75219’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Amway Center’, ‘Orlando Magic’, 18846, ‘40 W Church St’, ‘Orlando’, ‘FL’, ‘32801’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘AT&T Center’, ‘San Antonio Spurs’, 18418, ‘1 AT&T Center Parkway’, ‘San Antonio’, ‘TX’, ‘78219’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Ball Arena’, ‘Denver Nuggets’, 19520, ‘1000 Chopper Cir’, ‘Denver’, ‘CO’, ‘80204’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Bankers Life Fieldhouse’, ‘Indiana Pacers’, 17923, ‘125 S Pennsylvania St’, ‘Indianapolis’, ‘IN’, ‘46204’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Barclays Center’, ‘Brooklyn Nets’, 19000, ‘620 Atlantic Avenue’, ‘Brooklyn’, ‘NY’, ‘11217’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Capital One Arena’, ‘Washington Wizards’, 20356, ‘601 F St NW’, ‘Washington’, ‘DC’, ‘20004’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Chase Center’, ‘Golden State Warriors’, 18064, ‘1 Warriors Way’, ‘San Francisco’, ‘CA’, ‘94158’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Chesapeake Energy Arena’, ‘Oklahoma City Thunder’, 18203, ‘100 W Reno Ave’, ‘Oklahoma City’, ‘OK’, ‘73102’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘FedExForum’, ‘Memphis Grizzlies’, 17794, ‘191 Beale Street’, ‘Memphis’, ‘TN’, ‘38103’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Fiserv Forum’, ‘Milwaukee Bucks’, ‘17500’, ‘1111 Vel R. Phillips Ave’, ‘Milwaukee’, ‘WI’, ‘53203’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Golden 1 Center’, ‘Sacramento Kings’, 17583, ‘500 David J Stern Walk’, ‘Sacramento’, ‘CA’, ‘95814’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Little Caesars Arena’, ‘Detroit Pistons’, 20332, ‘2645 Woodward Ave’, ‘Detroit’, ‘MI’, ‘48201’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Madison Square Garden’, ‘New York Knicks’, 20789, ‘4 Pennsylvania Plaza’, ‘New York’, ‘NY’, ‘10001’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Moda Center’, ‘Portland Trail Blazers’, ‘19441’, ‘1 N Center Ct St’, ‘Portland’, ‘OR’, ‘97227’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘PHX Arena’, ‘Phoenix Suns’, 18422, ‘201 East Jefferson Street’, ‘Phoenix’, ‘AZ’, ‘85004’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Rocket Mortgage Fieldhouse’, ‘Cleveland Cavaliers’, 19432, ‘1 Center Court’, ‘Cleveland’, ‘OH’, ‘44115’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Smoothie King Center’, ‘New Orleans Pelicans’, 16867, ‘1501 Dave Dixon Dr’, ‘New Orleans’, ‘LA’, ‘70113’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Spectrum Center’, ‘Charlotte Hornets’, 9077, ‘333 East Trade Street’, ‘Charlotte’, ‘NC’, ‘28202’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Staples Center’, ‘Los Angeles Clippers’, 20000, ‘1111 S Figueroa St’, ‘Los Angeles’, ‘CA’, ‘90115’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Staples Center’, ‘Los Angeles Lakers’, 20000, ‘1111 S Figueroa St’, ‘Los Angeles’, ‘CA’, ‘90115’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘State Farm Arena’, ‘Atlanta Hawks’, 18118, ‘1 State Farm Dr’, ‘Atlanta’, ‘GA’, ‘30303’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Target Center’, ‘Minnesota Timberwolves’, 18979, ‘600 First Ave North’, ‘Minneapolis’, ‘MN’, ‘55403’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘TD Garden’, ‘Boston Celtics’, ‘18624’, ‘100 Legends Way’, ‘Boston’, ‘MA’, ‘02114’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Toyota Center’, ‘Houston Rockets’, ‘18055’, ‘1510 Polk Street’, ‘Houston’, ‘TX’, ‘77002’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘United Center’, ‘Chicago Bulls’, 20917, ‘1901 W Madison St’, ‘Chicago’, ‘IL’, ‘60612’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Vivint Smart Home Arena’, ‘Utah Jazz’, 18306, ‘301 S Temple’, ‘Salt Lake City’, ‘UT’, ‘84101’)
+INSERT INTO Arena (Team_Arena, Name, Capacity, Address, City, State, Zip)
+	VALUES (‘Wells Fargo Center’, ‘Philadelphia 76ers’, 20478, ‘3601 S Broad St’, ‘Philadelphia’, ‘PA’, ‘19148’)
+
+
+b) GAME TABLE
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (1, ‘Wells Fargo Center’, ‘Philadelphia 76ers vs Los Angeles Lakers’, #10-22-2020#, ‘8:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Date, Time)
+	VALUES (2, ‘Barclays Center’, ‘Brooklyn Nets vs Los Angeles Lakers’, #10-27-2020#, ‘7:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (3, ‘Moda Center’, ‘Portland Trail Blazers vs Los Angeles Lakers’, #09-18-2020#, ‘10:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (4, ‘American Airlines Arena’, ‘Miami Heat vs Los Angeles Lakers’, #12-03-2020#, ‘7:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (5, ‘Ball Arena’, ‘Denver Nuggets vs Los Angeles Lakers’, #12-14-2020#, ‘9:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (6, ‘United Center’, ‘Chicago Bulls vs Los Angeles Lakers’, #12-25-2020#, ‘1:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (7, ‘Chase Center’, ‘Golden State Warriors vs Los Angeles Lakers’, #01-02-2021#, ‘10:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (8, ‘Madison Square Garden’, ‘New York Knicks vs Los Angeles Lakers’, #01-15-2021#, ‘8:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (9, ‘Rocket Mortgage Fieldhouse’, ‘Cleveland Cavaliers vs Los Angeles Lakers’, #01-22-2021#, ‘8:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (10, ‘Amalie Arena’, ‘Toronto Raptors vs Los Angeles Lakers’, #02-04-2021#, ‘7:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (11, ‘Chesapeake Energy Arena’, ‘Oklahoma City Thunder vs Los Angeles Lakers’, #02-07-2021#, ‘10:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (12, ‘American Airlines Center’, ‘Dallas Mavericks vs Los Angeles Lakers’, #02-09-2021#, ‘8:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (13, ‘Spectrum Arena’, ‘Charlotte Hornets vs Los Angeles Lakers’, #02-27-2021#, ‘8:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (14, ‘Toyota Center’, ‘Houston Rockets vs Los Angeles Lakers’, #3-03-2021#, ‘3:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (15, ‘Amway Center’, ‘Orlando Magic vs Los Angeles Lakers’, #3-9-2021#, ‘10:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (16, ‘AT&T Center’, ‘San Antonio Spurs vs Los Angeles Lakers’, #3-14-2021#, ‘9:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (17, ‘Bankers Life Fieldhouse’, ‘Indiana Pacers vs Los Angeles Lakers’, #03-20-2021#’, ‘6:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (18, ‘Capital One Arena’, ‘Washington Wizards vs Los Angeles Lakers’, #03-28-2021#, ‘7:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (19, ‘FedExForum’, ‘Memphis Grizzlies vs Los Angeles Lakers’, #03-29-2021#, ‘10:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (20, ‘Golden 1 Center’, ‘Sacramento Kings vs Los Angeles Lakers’, #4-1-2021#, ‘10:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (21, ‘Little Caesars Arena’, ‘Detroit Pistons vs Los Angeles Lakers’, #04-03-2021#, ‘8:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (22, ‘Target Center’, ‘Minnesota Timberwolves vs Los Angeles Lakers’, #04-07-2021#, ‘7:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (23, ‘PHX Arena’, ‘Phoenix Suns vs Los Angeles Lakers’, #04-12-2021#, ‘5:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (24, ‘Staples Center’, ‘Los Angeles Clippers vs Los Angeles Lakers’, #04-13-2021#, ‘3:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (25, ‘Smoothie King Center’, ‘New Orleans Pelicans vs Los Angeles Lakers’, #04-14-2021#, ‘8:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (26, ‘TD Garden’, ‘Boston Celtics vs Los Angeles Lakers’, #04-17-2021#, ‘12:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (27, ‘Vivint Smart Home Arena’, ‘Utah Jazz vs Los Angeles Lakers’, #04-22-2021#, ‘9:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (28, ‘State Farm Arena’, ‘Atlanta Hawks vs Los Angeles Lakers’, #04-25-2021#, ‘8:00PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (29, ‘Fiserv Forum’, ‘Milwaukee Bucks vs Los Angeles Lakers’, #04-27-2021#, ‘7:30PM’)
+INSERT INTO Game (Game_Num, Team_Arena, Teams, Game_Date, Game_Time)
+	VALUES (30, ‘Staples Center’, ‘Los Angeles Lakers vs Phoenix Suns’, #04-30-2021#, ‘9:30PM’)
+
+c) TEAM TABLE 
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (1, ‘Atlanta Hawks’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (2, ‘Boston Celtics’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (3, ‘Brooklyn Nets’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (4, ‘Charlotte Hornets’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (5, ‘Chicago Bulls’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (6, ‘Cleveland Cavaliers’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (7, ‘Dallas Mavericks’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (8, ‘Denver Nuggets’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (9, ‘Detroit Pistons’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (10, ‘Golden State Warriors’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (11, ‘Houston Rockets’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (12, ‘Indiana Pacers’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (13, ‘Los Angeles Clippers’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (14, ‘Los Angeles Lakers’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (15, ‘Memphis Grizzlies’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (16, ‘Miami Heat’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (17, ‘Milwaukee Bucks’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (18, ‘Minnesota Timberwolves’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (19, ‘New Orleans Pelicans’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (20, ‘New York Knicks’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (21, ‘Oklahoma City Thunder’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (22, ‘Orlando Magic’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (23, ‘Philadelphia 76ers’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (24, ‘Phoenix Suns’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (25, ‘Portland Trailblazers’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (26, ‘Sacramento Kings’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (27, ‘San Antonio Spurs’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (28, ‘Toronto Raptors’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (29, ‘Utah Jazz’)
+INSERT INTO Team (Team_ID, Team_Name)
+	VALUES (30, ‘Washington Wizards’)
+
+d) PLAYERS TABLE
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“23”, “14”, “LeBron James”, “Point Guard”, “12/30/1984”, “39,200,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“3”, “14”, “Anthony Davis”, “Power Forward”, “3/11/1993”, “27,090,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“1”, “14”, “Kentavious Caldwell-Pope”, “Shooting Guard”, “2/18/1993”, “12,000,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“4”, “14”, “Alex Caruso”, “Point Guard”, “2/28/1994”, “2,750,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“5”, “14”, “Montrezl Harrell”, “Power Forward”, “1/26/1994”, “6,000,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“0”, “14”, “Kyle Kuzma”, “Small Forward”, “6/24/1995”, “2,200,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“88”, “14”, “Markieff Morris”, “Power Forward”, “9/2/1989”, “3,000,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“17”, “14”, “Dennis Schroder”, “Point Guard”, “9/15/1993”, “15,500,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“37”, “14”, “Kostas Antetokounmpo”, “Small Forward”, “11/20/1997”, “1,500,000”, “Greek”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“12”, “14”, “Devontae Cacok”, “Small Forward”, “10/8/1996”, “1,000,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“10”, “14”, “Jared Dudley”, “Small Forward”, “6/10/1985”, “3,000,000”, “American”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“33”, “14”, “Marc Gasol”, “Center”, “1/29/1985”, “3,500,000”, “Spanish”)
+INSERT INTO Players (Player_Num, Team_ID, Name, Position, Date_Of_Birth, Salary, Nationality)
+	VALUES (“9”, “14”, “Wesley Matthews”, “Shooting Guard”, “10/14/1986”, “2,600,000”, “American”)
+
+
+
+e) STATISTICS TABLE
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“1”, “1”, “23”, “54”, “10”, “15”, “3”, “3”, “2”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“2”, “2”, “3”, “40”, “5”, “20”, “7”, “2”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“3”, “3”, “1”, “15”, “2”, “4”, “1”, “5”, “4”) 
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“4”, “1”, “4”, “14”, “8”, “2”, “1”, “5”, “2”) 
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“5”, “1”, “5”, “5”, “5”, “5”, “5”, “5”, “5”)  
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“6”, “1”, “0”, “17”, “10”, “6”, “1”, “4”, “3”) 
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“7”, “1”, “88”, “13”, “3”, “8”, “2”, “4”, “3”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“8”, “1”, “17”, “10”, “7”, “1”, “0”, “4”, “2”) 
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“9”, “1”, “37”, “4”, “1”, “5”, “2”, “1”, “1”) 
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“10”, “1”, “12”, “2”, “2”, “14”, “2”, “1”, “0”) 
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“11”, “1”, “10”, “7”, “4”, “2”, “0”, “2” “4”) 
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“12”, “1”, “33”, “10”, “2”, “4”, “3”, “2”, “2”) 
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“13”, “1”, “9”, “20”, “15”, “5”, “0”, “11”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“14”, “2”, “23”, “40”, “15”, “15”, “4”, “5”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“15”, “2”, “3”, “20”, “5”, “25”, “8”, “3”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“16”, “2”, “1”, “10”, “5”, “5”, “0”, “7”, “2”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“17”, “2”, “4”, “15”, “7”, “5”, “0”, “11”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“18”, “2”, “5”, “2”, “7”, “5”, “0”, “2”, “3”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“19”, “2”, “0”, “20”, “1”, “5”, “1”, “5”, “4”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“20”, “2”, “88”, “12”, “1”, “5”, “0”, “0”, “2”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“21”, “2”, “17”, “10”, “9”, “2”, “0”, “7”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“22”, “2”, “37”, “14”, “2”, “10”, “3”, “1”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“23”, “2”, “12”, “2”, “5”, “8”, “0”, “0”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“24”, “2”, “10”, “6”, “5”, “1”, “0”, “2”, “3”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“25”, “2”, “33”, “16”, “3”, “8”, “1”, “1”, “2”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“26”, “2”, “9”, “10”, “20”, “6”, “0”, “10”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“27”, “3”, “23”, “35”, “12”, “15”, “2”, “6”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“28”, “3”, “3”, “30”, “3”, “14”, “5”, “1”, “1”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“29”, “3”, “1”, “18”, “7”, “4”, “0”, “4”, “2”)
+INSERT INTO Statistics (Stats_ID, Game_Num, Player_Num, Points, Assists, Rebounds, Blocks, Steals, Turnovers)
+	VALUES (“30”, “3”, “4”, “13”, “9”, “7”, “2”, “5”, “2”)
+
+
+
+f) COACHING STAFF TABLE
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“1”, “14”, “Head_Coach”, “Frank Vogel”, “6/21/1973”, “2,000,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“2”, “14”, “Assistant_Coach”, “Jason Kidd”, “3/23/1973”, “1,500,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“3”, “14”, “Assistant_Coach”, “Lionel Hollins”, “10/19/1953”, “1,000,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“4”, “14”, “Assistant_Coach”, “Phil Handy”, “8/24/1971”, “750,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“5”, “14”, “Assistant_Coach”, “Miles Simon”, “11/21/1975”, “400,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“6”, “14”, “Assistant_Coach”, “Mike Penberthy”, “11/29/1974”, “250,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“7”, “14”, “Assistant_Coach”, “Quinton Crawford”, “9/18/1990”, “150,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“8”, “14”, “Player_Development_Coach”, “Greg St. Jean”, “5/12/1982”, “100,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“9”, “14”, “Head_Video_Coordinator”, “Dru Anthrop”, “4/7/1972”, “90,000”)
+INSERT INTO Coaching_Staff (Coach_ID, Team_ID, Coach_Type, Name, Date_Of_Birth, Salary)
+	VALUES (“10”, “14”, “Assistant_Video_Coordinator”, “Jon Pastorek”, “7/9/1977”, “80,000”)
+
+
